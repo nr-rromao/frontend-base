@@ -1,0 +1,11 @@
+.nr-electrical-connector {
+    display: flex;
+    cursor: pointer;
+    margin: 0;
+}
+/* Hiding the native input checkbox */
+.nr-electrical-connector input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}

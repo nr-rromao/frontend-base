@@ -1,0 +1,24 @@
+{
+  "name": "nr-frontend",
+  "version": "1.0.0",
+  "description": "Modularized version of netrivals saas frontend",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "webpack-cli": "^3.3.2",
+    "webpack": "^4.30.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nr-rromao:Risoniaje1@github.com/nr-rromao/frontend-base.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nr-rromao/frontend-base/issues"
+  },
+  "homepage": "https://github.com/nr-rromao/frontend-base#readme"
+}
