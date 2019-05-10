@@ -1,4 +1,5 @@
-import nrElectricalConnector from 'nr-electrical-connector';
+import nrElectricalConnector from './nr-electrical-connector';
+import styles from '../../css/web-components/nr-smart-connection'
 
 const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection";
 
@@ -40,6 +41,7 @@ let nrSmartConnection = (function (){
                 console.warn(NR_SMART_CONNECTION_NAMESPACE+' | Error: this element is not an article tag');
                 return false;
             }
+
             return true;
         }
 
@@ -71,8 +73,10 @@ let nrSmartConnection = (function (){
                 isConnected = articleElement.classList.contains('is-connected'),
                 markup;
 
+            articleElement.classList.add(styles.nrSmartConnection);
+
             var markup = `
-                    <figure class="nr-smart-connection__product-info-container">
+                    <figure class="${styles.nrSmartConnection__productInfoContainer}">
                         <img src="${smartConnectionObj['own-product-img-src']}">
                         <figcaption>
                             <h3>${smartConnectionObj['own-product-title']}</h3>
@@ -80,7 +84,7 @@ let nrSmartConnection = (function (){
                         </figcaption>
                     </figure>
                     <input type="checkbox" class="js-electrical-connector-${smartConnectionObj['id']}">
-                    <figure class="nr-smart-connection__product-info-container">
+                    <figure class="${styles.nrSmartConnection__productInfoContainer}">
                         <img src="${smartConnectionObj['rival-product-img-src']}">
                         <figcaption>
                             <h3>${smartConnectionObj['rival-product-title']}</h3>

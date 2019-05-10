@@ -1,6 +1,8 @@
 const NR_ELECTRICAL_CONNECTOR_NAMESPACE = "nr-electrical-connector";
-const DEFAULT_PLUGGED_IMG_SRC = "assets/img/plugged.svg";
-const DEFAULT_UNPLUGGED_IMG_SRC = "assets/img/unplugged.svg";
+
+import styles from '../../css/web-components/nr-electrical-connector'
+import pluggedImg from '../../img/plugged.svg'
+import unpluggedImg from '../../img/unplugged.svg'
 
 let nrElectricalConnector = (function (){
     'use strict';
@@ -11,8 +13,8 @@ let nrElectricalConnector = (function (){
 
         // Default options
         var defaultOptions = {
-            pluggedImgSrc: DEFAULT_PLUGGED_IMG_SRC,
-            unpluggedImgSrc: DEFAULT_UNPLUGGED_IMG_SRC,
+            pluggedImgSrc: pluggedImg,
+            unpluggedImgSrc: unpluggedImg,
         };
 
         var options = Object.assign({}, defaultOptions, customOptions);
@@ -45,8 +47,9 @@ let nrElectricalConnector = (function (){
         }
 
         var elementIsAlreadyComponent = function(element) {
+            console.log(styles);
             return (element.parentNode.tagName.toLowerCase() === 'label' &
-                    element.parentNode.classList.contains(NR_ELECTRICAL_CONNECTOR_NAMESPACE));
+                    element.parentNode.classList.contains(styles.nrElectricalConnector));
         }
 
         // Main entry point
@@ -75,7 +78,7 @@ let nrElectricalConnector = (function (){
             markup = elementIsChecked ? '<img src="'+ options.pluggedImgSrc +'" />':'<img src="'+ options.unpluggedImgSrc +'" />';
 
             parentLabelElement = document.createElement('label');
-            parentLabelElement.classList.add(NR_ELECTRICAL_CONNECTOR_NAMESPACE);
+            parentLabelElement.classList.add(styles.nrElectricalConnector);
 
             if (elementID) {
                 parentLabelElement.setAttribute('for', elementID);
