@@ -26,11 +26,40 @@
         </nav>
         <main class="js-web-components-entry">
             <h1>Smart Connections</h1>
+            <div class="alert alert-info" role="alert">
+                Esta alerta demuestra que la integración con Bootstrap (HTML, CSS y JS) está funcionando
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <section class="js-smart-connections">
                 <article class="js-smart-connection-1" data-smart-connection-id="1587"></article>
                 <article class="js-smart-connection-2" data-smart-connection-id="1588"></article>
+                <div class="sample-buttons-container">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Abrir modal</button>
+                </div>
             </section>
         </main>
+    </div>
+    <!-- Bootstrap Modals just for testing -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ejemplo de Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>El contenido del modal va aquí</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Guardar cambios</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
     </div>
     <footer>
         <nav>

@@ -6,6 +6,10 @@
 /* Importing Bootstrap optional parts*/
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/modal";
 
 /* Netrivals Palette */
 $base-text-color: #505458;
@@ -87,6 +91,10 @@ header {
       }
     }
   }
+}
+
+.sample-buttons-container {
+  margin-bottom: 16px;
 }
 
 footer {
