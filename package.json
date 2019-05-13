@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Modularized version of netrivals saas frontend",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

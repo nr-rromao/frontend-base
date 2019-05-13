@@ -1,3 +1,12 @@
+/* Importing Bootstrap required parts*/
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+/* Importing Bootstrap optional parts*/
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+
 /* Netrivals Palette */
 $base-text-color: #505458;
 $main-header-text-color: #898f9a;
@@ -56,6 +65,8 @@ header {
     border: none;
     border-radius: 4px;
     background-color: $main-header-input-background-color;
+    font-size: $font-size-small;
+    width: 240px;
   }
 }
 
