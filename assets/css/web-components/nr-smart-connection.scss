@@ -1,6 +1,14 @@
+$font-name: 'JosefinSans';
+
+@font-face {
+    font-family: $font-name;
+    src: url("../../fonts/" + $font-name + ".ttf") format("truetype");
+}
+
 .nrSmartConnection {
     display: flex;
     padding: 16px;
+    font-family: $font-name, sans-serif;
 }
 .nrSmartConnection__productInfoContainer {
     border: 1px solid #444;

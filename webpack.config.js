@@ -84,6 +84,20 @@ module.exports = {
                         },
                     },
                 ],
+            },
+            {
+                test: /\.((o|t)tf)$/,
+                include: [
+                    path.resolve(__dirname, 'assets/fonts')
+                ],
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]',
+                        },
+                    },
+                ],
             }
         ]
     },
