@@ -1,91 +1,87 @@
-import nrElectricalConnector from './nr-electrical-connector';
+import nrElectricalConnector from './nr-electrical-connector'
 import styles from '../../css/web-components/nr-smart-connection'
 
-const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection";
+const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection"
 
-let nrSmartConnection = (function (){
-    'use strict';
+const nrSmartConnection = (() => {
+    'use strict'
 
-    var Constructor = function(customOptions){
+    const Constructor = customOptions => {
 
-        var publicMethods = {};
+        let publicMethods = {}
 
         // Default options
-        var defaultOptions = {};
+        const defaultOptions = {}
 
-        var options = Object.assign({}, defaultOptions, customOptions);
+        const options = {...defaultOptions, ...customOptions}
 
-        var smartConnectionObj = {};
+        let smartConnectionObj = {}
 
         // Throw an error if required preconditions violated
-        var isCalledProperly = function () {
+        const isCalledProperly = () => {
 
             // Checking selector is passed
             if (options.selector === '') {
 
-                throw NR_SMART_CONNECTION_NAMESPACE+' | Error: the "selector" parameter is empty. A selector is needed to attach this plugin to.';
+                throw NR_SMART_CONNECTION_NAMESPACE+' | Error: the "selector" parameter is empty. A selector is needed to attach this plugin to.'
 
-            } else if (document.querySelectorAll(options.selector).length == 0) {
+            } else if (document.querySelectorAll(options.selector).length === 0) {
 
-                throw NR_SMART_CONNECTION_NAMESPACE+' | Error: there is no DOM items with "' + options.selector + '" selector. A valid DOM element is needed to attach this plugin to.';
+                throw NR_SMART_CONNECTION_NAMESPACE+' | Error: there is no DOM items with "' + options.selector + '" selector. A valid DOM element is needed to attach this plugin to.'
 
             }
 
-            return true;
-        };
-
-        // Check if element is the expected type, otherwise create a warning and ignore the element
-        var elementIsAnArticle = function(element) {
-
-            if (element.tagName.toLowerCase() !== 'article') {
-                console.warn(NR_SMART_CONNECTION_NAMESPACE+' | Error: this element is not an article tag');
-                return false;
-            }
-
-            return true;
+            return true
         }
 
-        var changeState = function(smartConnectionElement, newState){
-            smartConnectionElement.setSmartConnectionState(newState);
+        // Check if element is the expected type, otherwise create a warning and ignore the element
+        const elementIsAnArticle = element => {
+
+            if (element.tagName.toLowerCase() !== 'article') {
+                console.warn(NR_SMART_CONNECTION_NAMESPACE+' | Error: this element is not an article tag')
+                return false
+            }
+
+            return true
+        }
+
+        const changeState = (smartConnectionElement, newState) => {
+            smartConnectionElement.setSmartConnectionState(newState)
         }
 
         // Main entry point
-        var init = function () {
+        const init = () => {
 
             if (isCalledProperly()) {
 
-                var elements = document.querySelectorAll(options.selector);
+                const elements = document.querySelectorAll(options.selector)
 
-                elements.forEach(function(element, index){
+                elements.forEach((element, index) => {
                     if (elementIsAnArticle(element)) {
                         fetch('http://localhost:3000/smart-connections/'+element.getAttribute('data-smart-connection-id'))
                             .then(response => response.json())
                             .then(data => {
-                                smartConnectionObj = data;
-                                createMarkUp(element);
+                                smartConnectionObj = data
+                                createMarkUp(element)
                                 new nrElectricalConnector({
                                     selector:'[class^="js-electrical-connector-"]',
                                     callback: changeState,
                                     caller: element
-                                });
-                                addSetters(element);
-                            });
+                                })
+                                addSetters(element)
+                            })
                     }
                 })
             }
-        };
+        }
 
         // Create plugin HTML elements
-        var createMarkUp = function(articleElement) {
+        const createMarkUp = articleElement => {
 
-            var elementID = articleElement.getAttribute('id'),
-                isConnected = articleElement.classList.contains('is-connected'),
-                markup;
+            articleElement.classList.add(styles.nrSmartConnection)
 
-            articleElement.classList.add(styles.nrSmartConnection);
-
-            var markup = `
-                    <figure class="${styles.nrSmartConnection__productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}">
+            let markup = `
+                    <figure class="${styles.productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}">
                         <img src="${smartConnectionObj['own-product-img-src']}">
                         <figcaption>
                             <h3>${smartConnectionObj['own-product-title']}</h3>
@@ -93,43 +89,43 @@ let nrSmartConnection = (function (){
                         </figcaption>
                     </figure>
                     <input type="checkbox" class="js-electrical-connector-${smartConnectionObj['id']}" ${smartConnectionObj['is-connected'] ? "checked":""}>
-                    <figure class="${styles.nrSmartConnection__productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
+                    <figure class="${styles.productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
                         <img src="${smartConnectionObj['rival-product-img-src']}">
                         <figcaption>
                             <h3>${smartConnectionObj['rival-product-title']}</h3>
                             <h4>Precio: ${smartConnectionObj['rival-product-currency-symbol']}${smartConnectionObj['rival-product-price']}</h4>
                         </figcaption>
-                    </figure>`;
+                    </figure>`
 
-            articleElement.insertAdjacentHTML('beforeend', markup);
+            articleElement.insertAdjacentHTML('beforeend', markup)
 
         }
 
-        var addSetters = function(element) {
+        const addSetters = element => {
 
             element.setSmartConnectionState = function(newState){
-                setNewState(element, newState);
-            };
+                setNewState(element, newState)
+            }
 
         }
 
-        var setNewState = function(element, newState){
+        const setNewState = (element, newState) => {
             if (newState) {
-                element.getElementsByTagName("figure")[0].classList.add(styles.isConnected);
-                element.getElementsByTagName("figure")[1].classList.add(styles.isConnected);
+                element.getElementsByTagName("figure")[0].classList.add(styles.isConnected)
+                element.getElementsByTagName("figure")[1].classList.add(styles.isConnected)
             } else {
-                element.getElementsByTagName("figure")[0].classList.remove(styles.isConnected);
-                element.getElementsByTagName("figure")[1].classList.remove(styles.isConnected);
+                element.getElementsByTagName("figure")[0].classList.remove(styles.isConnected)
+                element.getElementsByTagName("figure")[1].classList.remove(styles.isConnected)
             }
         }
 
-        init();
+        init()
 
-        return publicMethods;
-    };
+        return publicMethods
+    }
 
-    return Constructor;
+    return Constructor
 
-})();
+})()
 
-export default nrSmartConnection;
+export default nrSmartConnection

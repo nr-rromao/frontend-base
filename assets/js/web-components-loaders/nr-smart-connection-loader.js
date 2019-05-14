@@ -1,20 +1,19 @@
-import nrSmartConnection from '../web-components/nr-smart-connection';
+import nrSmartConnection from '../web-components/nr-smart-connection'
 
-let nrSmartConnectionsView = (function(){
+let nrSmartConnectionsView = (() => {
 
-    var Constructor = function(customOptions){
+    const Constructor = customOptions => {
 
-        // Default options
-        var defaultOptions = {};
+        const defaultOptions = {}
 
-        var options = Object.assign({}, defaultOptions, customOptions);
+        const options = {...defaultOptions, ...customOptions};
 
-        let mySmartConnection = new nrSmartConnection({selector:'[class^="js-smart-connection-"]'});
+        let mySmartConnection = new nrSmartConnection({selector:'[class^="js-smart-connection-"]'})
 
     }
 
-    return Constructor;
+    return Constructor
 
-})();
+})()
 
-export default nrSmartConnectionsView;
+export default nrSmartConnectionsView

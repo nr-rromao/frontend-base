@@ -8,14 +8,13 @@
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/close";
-@import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/modal";
 
 /* Netrivals Palette */
 $base-text-color: #505458;
 $main-header-text-color: #898f9a;
 $main-header-background-color: #1E2433;
-$main-header-input-background-color: lighten($main-header-background-color,10%);
+$main-header-input-background-color: lighten($main-header-background-color, 10%);
 $footer-text-color: #6f7b8a;
 
 /* Font sizes */
