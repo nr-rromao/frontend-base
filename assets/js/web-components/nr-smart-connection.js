@@ -1,7 +1,7 @@
+const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection"
+
 import nrElectricalConnector from './nr-electrical-connector'
 import styles from '../../css/web-components/nr-smart-connection'
-
-const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection"
 
 const nrSmartConnection = (() => {
     'use strict'
@@ -14,8 +14,6 @@ const nrSmartConnection = (() => {
         const defaultOptions = {}
 
         const options = {...defaultOptions, ...customOptions}
-
-        let smartConnectionObj = {}
 
         // Throw an error if required preconditions violated
         const isCalledProperly = () => {
@@ -47,6 +45,24 @@ const nrSmartConnection = (() => {
 
         const changeState = (smartConnectionElement, newState) => {
             smartConnectionElement.setSmartConnectionState(newState)
+            fetch('http://localhost:3000/smart-connections/'+smartConnectionElement.getAttribute('data-smart-connection-id'),
+                {
+                        method: 'PUT',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ...smartConnectionElement.smartConnectionObj,
+                            'is-connected': newState
+                        })
+                    }
+                )
+                .then(response => response.json())
+                .then(data => {
+                    // Manage response errors here
+                    console.log(data)
+                })
         }
 
         // Main entry point
@@ -61,7 +77,7 @@ const nrSmartConnection = (() => {
                         fetch('http://localhost:3000/smart-connections/'+element.getAttribute('data-smart-connection-id'))
                             .then(response => response.json())
                             .then(data => {
-                                smartConnectionObj = data
+                                element.smartConnectionObj = data
                                 createMarkUp(element)
                                 new nrElectricalConnector({
                                     selector:'[class^="js-electrical-connector-"]',
@@ -81,19 +97,19 @@ const nrSmartConnection = (() => {
             articleElement.classList.add(styles.nrSmartConnection)
 
             let markup = `
-                    <figure class="${styles.productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}">
-                        <img src="${smartConnectionObj['own-product-img-src']}">
+                    <figure class="${styles.productInfoContainer} ${articleElement.smartConnectionObj['is-connected'] ? styles.isConnected:""}">
+                        <img src="${articleElement.smartConnectionObj['own-product-img-src']}">
                         <figcaption>
-                            <h3>${smartConnectionObj['own-product-title']}</h3>
-                            <h4>Precio: ${smartConnectionObj['own-product-currency-symbol']}${smartConnectionObj['own-product-price']}</h4>
+                            <h3>${articleElement.smartConnectionObj['own-product-title']}</h3>
+                            <h4>Precio: ${articleElement.smartConnectionObj['own-product-currency-symbol']}${articleElement.smartConnectionObj['own-product-price']}</h4>
                         </figcaption>
                     </figure>
-                    <input type="checkbox" class="js-electrical-connector-${smartConnectionObj['id']}" ${smartConnectionObj['is-connected'] ? "checked":""}>
-                    <figure class="${styles.productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
-                        <img src="${smartConnectionObj['rival-product-img-src']}">
+                    <input type="checkbox" class="js-electrical-connector-${articleElement.smartConnectionObj['id']}" ${articleElement.smartConnectionObj['is-connected'] ? "checked":""}>
+                    <figure class="${styles.productInfoContainer} ${articleElement.smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
+                        <img src="${articleElement.smartConnectionObj['rival-product-img-src']}">
                         <figcaption>
-                            <h3>${smartConnectionObj['rival-product-title']}</h3>
-                            <h4>Precio: ${smartConnectionObj['rival-product-currency-symbol']}${smartConnectionObj['rival-product-price']}</h4>
+                            <h3>${articleElement.smartConnectionObj['rival-product-title']}</h3>
+                            <h4>Precio: ${articleElement.smartConnectionObj['rival-product-currency-symbol']}${articleElement.smartConnectionObj['rival-product-price']}</h4>
                         </figcaption>
                     </figure>`
 
