@@ -1,9 +1,9 @@
 const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection"
 
-import nrElectricalConnector from './nr-electrical-connector'
+import NrElectricalConnector from './nr-electrical-connector'
 import styles from '../../css/web-components/nr-smart-connection'
 
-const nrSmartConnection = (() => {
+const NrSmartConnection = (() => {
     'use strict'
 
     const Constructor = customOptions => {
@@ -58,10 +58,13 @@ const nrSmartConnection = (() => {
                         })
                     }
                 )
-                .then(response => response.json())
-                .then(data => {
-                    // Manage response errors here
-                    console.log(data)
+                .then(response => {
+                    if(!response.ok){
+                        console.log('There was a problem with the fetching process:' + error.message);
+                    }
+                })
+                .catch(error => {
+                    console.log('There was a problem with the fetching process:' + error.message);
                 })
         }
 
@@ -75,16 +78,26 @@ const nrSmartConnection = (() => {
                 elements.forEach((element, index) => {
                     if (elementIsAnArticle(element)) {
                         fetch('http://localhost:3000/smart-connections/'+element.getAttribute('data-smart-connection-id'))
-                            .then(response => response.json())
+                            .then(response => {
+                                if(!response.ok){
+                                    console.log('Hubo un problema con la petición Fetch:' + error.message)
+                                    throw error
+                                }else{
+                                    return response.json()
+                                }
+                            })
                             .then(data => {
                                 element.smartConnectionObj = data
                                 createMarkUp(element)
-                                new nrElectricalConnector({
+                                new NrElectricalConnector({
                                     selector:'[class^="js-electrical-connector-"]',
                                     callback: changeState,
                                     caller: element
                                 })
                                 addSetters(element)
+                            })
+                            .catch(function(error) {
+                                console.log('Hubo un problema con la petición Fetch:' + error.message);
                             })
                     }
                 })
@@ -96,20 +109,22 @@ const nrSmartConnection = (() => {
 
             articleElement.classList.add(styles.nrSmartConnection)
 
+            let smartConnectionObj = articleElement.smartConnectionObj || {};
+
             let markup = `
-                    <figure class="${styles.productInfoContainer} ${articleElement.smartConnectionObj['is-connected'] ? styles.isConnected:""}">
-                        <img src="${articleElement.smartConnectionObj['own-product-img-src']}">
+                    <figure class="${styles.productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}">
+                        <img src="${smartConnectionObj['own-product-img-src']}">
                         <figcaption>
-                            <h3>${articleElement.smartConnectionObj['own-product-title']}</h3>
-                            <h4>Precio: ${articleElement.smartConnectionObj['own-product-currency-symbol']}${articleElement.smartConnectionObj['own-product-price']}</h4>
+                            <h3>${smartConnectionObj['own-product-title']}</h3>
+                            <h4>Precio: ${smartConnectionObj['own-product-currency-symbol']}${smartConnectionObj['own-product-price']}</h4>
                         </figcaption>
                     </figure>
-                    <input type="checkbox" class="js-electrical-connector-${articleElement.smartConnectionObj['id']}" ${articleElement.smartConnectionObj['is-connected'] ? "checked":""}>
-                    <figure class="${styles.productInfoContainer} ${articleElement.smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
-                        <img src="${articleElement.smartConnectionObj['rival-product-img-src']}">
+                    <input type="checkbox" class="js-electrical-connector-${smartConnectionObj['id']}" ${articleElement.smartConnectionObj['is-connected'] ? "checked":""}>
+                    <figure class="${styles.productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
+                        <img src="${smartConnectionObj['rival-product-img-src']}">
                         <figcaption>
-                            <h3>${articleElement.smartConnectionObj['rival-product-title']}</h3>
-                            <h4>Precio: ${articleElement.smartConnectionObj['rival-product-currency-symbol']}${articleElement.smartConnectionObj['rival-product-price']}</h4>
+                            <h3>${smartConnectionObj['rival-product-title']}</h3>
+                            <h4>Precio: ${smartConnectionObj['rival-product-currency-symbol']}${smartConnectionObj['rival-product-price']}</h4>
                         </figcaption>
                     </figure>`
 
@@ -144,4 +159,4 @@ const nrSmartConnection = (() => {
 
 })()
 
-export default nrSmartConnection
+export default NrSmartConnection

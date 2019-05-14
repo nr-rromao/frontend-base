@@ -4,7 +4,7 @@ import styles from '../../css/web-components/nr-electrical-connector'
 import pluggedImg from '../../img/plugged.svg'
 import unpluggedImg from '../../img/unplugged.svg'
 
-const nrElectricalConnector = (() => {
+const NrElectricalConnector = (() => {
     'use strict'
 
     const Constructor = customOptions => {
@@ -149,4 +149,4 @@ const nrElectricalConnector = (() => {
 
 })()
 
-export default nrElectricalConnector
+export default NrElectricalConnector

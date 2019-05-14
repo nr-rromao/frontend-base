@@ -1,6 +1,6 @@
-import nrSmartConnection from '../web-components/nr-smart-connection'
+import NrSmartConnection from '../web-components/nr-smart-connection'
 
-let nrSmartConnectionsView = (() => {
+let NrSmartConnectionsView = (() => {
 
     const Constructor = customOptions => {
 
@@ -8,7 +8,7 @@ let nrSmartConnectionsView = (() => {
 
         const options = {...defaultOptions, ...customOptions};
 
-        let mySmartConnection = new nrSmartConnection({selector:'[class^="js-smart-connection-"]'})
+        let mySmartConnection = new NrSmartConnection({selector:'[class^="js-smart-connection-"]'})
 
     }
 
@@ -16,4 +16,4 @@ let nrSmartConnectionsView = (() => {
 
 })()
 
-export default nrSmartConnectionsView
+export default NrSmartConnectionsView
