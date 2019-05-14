@@ -16,7 +16,9 @@ $font-name: 'JosefinSans';
     border-radius: 4px;
     padding: 16px;
     margin: 0;
-}
-.nrSmartConnection__productInfo-container--isConnected {
-    border-color: green;
+    transition: border 0.25s ease;
+    &.isConnected {
+        border-color: green;
+        border-width: 4px;
+    }
 }

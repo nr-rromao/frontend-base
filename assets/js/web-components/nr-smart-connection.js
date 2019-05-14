@@ -45,6 +45,10 @@ let nrSmartConnection = (function (){
             return true;
         }
 
+        var changeState = function(smartConnectionElement, newState){
+            smartConnectionElement.setSmartConnectionState(newState);
+        }
+
         // Main entry point
         var init = function () {
 
@@ -59,7 +63,12 @@ let nrSmartConnection = (function (){
                             .then(data => {
                                 smartConnectionObj = data;
                                 createMarkUp(element);
-                                new nrElectricalConnector({selector:'[class^="js-electrical-connector-"]'});
+                                new nrElectricalConnector({
+                                    selector:'[class^="js-electrical-connector-"]',
+                                    callback: changeState,
+                                    caller: element
+                                });
+                                addSetters(element);
                             });
                     }
                 })
@@ -76,15 +85,15 @@ let nrSmartConnection = (function (){
             articleElement.classList.add(styles.nrSmartConnection);
 
             var markup = `
-                    <figure class="${styles.nrSmartConnection__productInfoContainer}">
+                    <figure class="${styles.nrSmartConnection__productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}">
                         <img src="${smartConnectionObj['own-product-img-src']}">
                         <figcaption>
                             <h3>${smartConnectionObj['own-product-title']}</h3>
                             <h4>Precio: ${smartConnectionObj['own-product-currency-symbol']}${smartConnectionObj['own-product-price']}</h4>
                         </figcaption>
                     </figure>
-                    <input type="checkbox" class="js-electrical-connector-${smartConnectionObj['id']}">
-                    <figure class="${styles.nrSmartConnection__productInfoContainer}">
+                    <input type="checkbox" class="js-electrical-connector-${smartConnectionObj['id']}" ${smartConnectionObj['is-connected'] ? "checked":""}>
+                    <figure class="${styles.nrSmartConnection__productInfoContainer} ${smartConnectionObj['is-connected'] ? styles.isConnected:""}"">
                         <img src="${smartConnectionObj['rival-product-img-src']}">
                         <figcaption>
                             <h3>${smartConnectionObj['rival-product-title']}</h3>
@@ -94,6 +103,24 @@ let nrSmartConnection = (function (){
 
             articleElement.insertAdjacentHTML('beforeend', markup);
 
+        }
+
+        var addSetters = function(element) {
+
+            element.setSmartConnectionState = function(newState){
+                setNewState(element, newState);
+            };
+
+        }
+
+        var setNewState = function(element, newState){
+            if (newState) {
+                element.getElementsByTagName("figure")[0].classList.add(styles.isConnected);
+                element.getElementsByTagName("figure")[1].classList.add(styles.isConnected);
+            } else {
+                element.getElementsByTagName("figure")[0].classList.remove(styles.isConnected);
+                element.getElementsByTagName("figure")[1].classList.remove(styles.isConnected);
+            }
         }
 
         init();

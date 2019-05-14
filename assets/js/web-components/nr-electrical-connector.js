@@ -47,7 +47,6 @@ let nrElectricalConnector = (function (){
         }
 
         var elementIsAlreadyComponent = function(element) {
-            console.log(styles);
             return (element.parentNode.tagName.toLowerCase() === 'label' &
                     element.parentNode.classList.contains(styles.nrElectricalConnector));
         }
@@ -109,6 +108,10 @@ let nrElectricalConnector = (function (){
 
             setNewState(inputElement, !isOn);
 
+            if(options.callback !== undefined){
+                options.callback(options.caller, getState(inputElement));
+            }
+
         }
 
         var setNewState = function(element, newState){
@@ -121,10 +124,14 @@ let nrElectricalConnector = (function (){
             }
         }
 
+        var getState = function(element){
+            return element.hasAttribute('checked');
+        }
+
         var addGetters = function(element) {
 
             element.getPlugState = function(){
-                return element.hasAttribute('checked');
+                return getState(element);
             };
 
         }
