@@ -25,6 +25,9 @@ $font-name: 'JosefinSans';
         }
         figcaption {
             align-self: baseline;
+            h4 {
+                font-weight: 100;
+            }
         }
         &.isConnected {
             border-color: green;
