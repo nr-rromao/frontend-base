@@ -2,6 +2,7 @@ const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection"
 
 import NrElectricalConnector from './nr-electrical-connector'
 import styles from '../../css/web-components/nr-smart-connection'
+import $ from 'jquery'
 
 const NrSmartConnection = (() => {
     'use strict'
@@ -60,11 +61,13 @@ const NrSmartConnection = (() => {
                 )
                 .then(response => {
                     if(!response.ok){
-                        console.log('There was a problem with the fetching process:' + error.message);
+                        console.log('There was a problem with the fetching process:' + error.message)
+                    }else{
+                        $('#connectionChangedModal').modal('show')
                     }
                 })
                 .catch(error => {
-                    console.log('There was a problem with the fetching process:' + error.message);
+                    console.log('There was a problem with the fetching process:' + error.message)
                 })
         }
 
