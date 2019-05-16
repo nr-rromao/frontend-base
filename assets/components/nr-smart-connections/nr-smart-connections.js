@@ -1,4 +1,4 @@
-import NrSmartConnection from '../web-components/nr-smart-connection'
+import NrSmartConnection from '../nr-smart-connection/nr-smart-connection'
 import $ from 'jquery'
 
 let NrSmartConnectionsView = (() => {

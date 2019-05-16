@@ -1,8 +1,8 @@
 const NR_ELECTRICAL_CONNECTOR_NAMESPACE = "nr-electrical-connector"
 
-import styles from '../../css/web-components/nr-electrical-connector'
-import pluggedImg from '../../img/plugged.svg'
-import unpluggedImg from '../../img/unplugged.svg'
+import styles from './nr-electrical-connector.scss'
+import pluggedImg from './img/plugged.svg'
+import unpluggedImg from './img/unplugged.svg'
 
 const NrElectricalConnector = (() => {
     'use strict'

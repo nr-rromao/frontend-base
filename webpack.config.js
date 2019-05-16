@@ -35,7 +35,7 @@ module.exports = {
             {
                 test: /\.s(a|c)ss$/,
                 include: [
-                    path.resolve(__dirname, 'assets/css/web-components')
+                    path.resolve(__dirname, 'assets/components')
                 ],
                 loader: [
                     isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -58,7 +58,7 @@ module.exports = {
             {
                 test: /\.s(a|c)ss$/,
                 exclude: [
-                    path.resolve(__dirname, 'assets/css/web-components')
+                    path.resolve(__dirname, 'assets/components')
                 ],
                 loader: [
                     isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -74,7 +74,7 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)$/,
                 include: [
-                    path.resolve(__dirname, 'assets/img')
+                    path.resolve(__dirname, 'assets')
                 ],
                 use: [
                     {
@@ -88,7 +88,7 @@ module.exports = {
             {
                 test: /\.((o|t)tf)$/,
                 include: [
-                    path.resolve(__dirname, 'assets/fonts')
+                    path.resolve(__dirname, 'assets')
                 ],
                 use: [
                     {

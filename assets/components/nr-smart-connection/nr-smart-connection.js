@@ -1,7 +1,7 @@
 const NR_SMART_CONNECTION_NAMESPACE = "nr-smart-connection"
 
-import NrElectricalConnector from './nr-electrical-connector'
-import styles from '../../css/web-components/nr-smart-connection'
+import NrElectricalConnector from '../nr-electrical-connector/nr-electrical-connector'
+import styles from './nr-smart-connection.scss'
 import $ from 'jquery'
 
 const NrSmartConnection = (() => {
