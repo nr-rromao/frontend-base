@@ -1,0 +1,19 @@
+/* Styles for Main footer */
+
+footer {
+    width: 100%;
+    color: $footer-text-color;
+    text-align: center;
+    margin-top: 100px;
+    border-top: 1px solid $footer-border-top-color;
+    >nav {
+        font-size: $font-size-smaller;
+        padding: 16px;
+        color: $main-header-text-color;
+        a {
+            padding: 16px;
+            color: $main-header-text-color;
+            text-decoration: none;
+        }
+    }
+}
