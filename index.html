@@ -6,11 +6,11 @@
     <title>Netrivals Saas Dummy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
-<body>
+<body class="avoid-bootstrap3-body-collisions">
     <div class="non-footer">
         <header>
             <ul>
-                <li><img src="assets/img/nr-logo.png"> |</li>
+                <li><img src="assets/img/nr-logo.png"></li>
                 <li>mitienda.es</li>
                 <li><input type="text" placeholder="🔍 Busca en tus productos…"></li>
             </ul>
@@ -33,20 +33,22 @@
         </main>
     </div>
     <!-- Bootstrap Modals just for testing -->
-    <div class="modal fade" id="connectionChangedModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Conexión modificada</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>La conexión ha sido modificada exitosamente</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    <div class="avoid-bootstrap3-collisions">
+        <div class="modal fade" id="connectionChangedModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Conexión modificada</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>La conexión ha sido modificada exitosamente</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>

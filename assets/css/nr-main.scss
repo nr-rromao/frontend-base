@@ -4,10 +4,14 @@
 @import "~bootstrap/scss/mixins";
 
 /* Importing Bootstrap optional parts*/
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/close";
-@import "~bootstrap/scss/modal";
+.avoid-bootstrap3-collisions {
+  @import "~bootstrap/scss/reboot";
+  @import "~bootstrap/scss/buttons";
+  @import "~bootstrap/scss/close";
+}
+.avoid-bootstrap3-body-collisions {
+  @import "~bootstrap/scss/modal";
+}
 
 /* Netrivals Palette */
 @import "nr-colors";
